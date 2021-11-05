@@ -1,28 +1,28 @@
 module.exports = app => {
-    const tutorials = require("../controllers/tutorial.controller.js");
+    const equipment = require("../controllers/equipment.controller.js");
   
     var router = require("express").Router();
   
     // Create a new Tutorial
-    router.post("/", tutorials.create);
+    router.post("/", equipment.create);
   
     // Retrieve all Tutorials
-    router.get("/", tutorials.findAll);
+    router.get("/", equipment.findAll);
   
     // Retrieve all published Tutorials
-    router.get("/published", tutorials.findAllPublished);
+    router.get("/published", equipment.findAllPublished);
   
     // Retrieve a single Tutorial with id
-    router.get("/:id", tutorials.findOne);
+    router.get("/:id", equipment.findOne);
   
     // Update a Tutorial with id
-    router.put("/:id", tutorials.update);
+    router.put("/:id", equipment.update);
   
     // Delete a Tutorial with id
-    router.delete("/:id", tutorials.delete);
+    router.delete("/:id", equipment.delete);
   
     // Delete all Tutorials
-    router.delete("/", tutorials.deleteAll);
+    router.delete("/", equipment.deleteAll);
   
-    app.use('/api/tutorials', router);
+    app.use('/api/equipment', router);
   };

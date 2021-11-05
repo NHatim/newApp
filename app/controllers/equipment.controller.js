@@ -1,10 +1,10 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Equipment = db.equipment;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {  
-    if (!req.body.title) {
+    if (!req.body.name) {
       res.status(400).send({
         message: "Il n y a pas de contenu"  
       });
@@ -12,14 +12,15 @@ exports.create = (req, res) => {
     }
   
     // Create a Tutorial
-    const tutorial = {
-      title: req.body.title,
-      description: req.body.description,
-      published: req.body.published ? req.body.published : false
+    const equipment = {
+      name: req.body.name,
+      price: parseFloat(req.body.price),
+      is_used: req.body.is_used ? req.body.is_used : false
     };
   
+    console.log(equipment)
     // Save Tutorial in the database
-    Tutorial.create(tutorial)
+    Equipment.create(equipment)
       .then(data => {
         res.send(data);
       })
@@ -33,10 +34,10 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    const name = req.query.name;
+    var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
   
-    Tutorial.findAll({ where: condition })
+    Equipment.findAll({ where: condition })
       .then(data => {
         res.send(data);
       })
